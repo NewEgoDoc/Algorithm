@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class boj10828 {
 	public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//±âÁ¸ Scannerº¸´Ù ¼º´ÉÀÌ ÁÁ±â ¶§¹®¿¡ ¹Ýµå½Ã ¾Ë¾Æ³õÀÚ
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//ï¿½ï¿½ï¿½ï¿½ Scannerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ï¿½ï¿½
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));//==
 
         int n = Integer.parseInt(br.readLine());
