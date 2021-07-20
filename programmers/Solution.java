@@ -1,4 +1,4 @@
-package algorithm.programmers;
+package algorithm.programmers.키패드누르기;
 
 public class Solution {
 

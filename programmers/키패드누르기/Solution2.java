@@ -1,6 +1,6 @@
-package algorithm.programmers.Å°ÆÐµå´©¸£±â;
+package algorithm.programmers.í‚¤íŒ¨ë“œëˆ„ë¥´ê¸°;
 
-public class Solution {
+public class Solution2 {
     public static String solution(int[] numbers, String hand) {
         StringBuilder sb = new StringBuilder();
         int left = 10;

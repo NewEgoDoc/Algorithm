@@ -1,10 +1,10 @@
-package algorithm.programmers.¼ıÀÚ¹®ÀÚ¿­°ú¿µ´Ü¾î;
+package algorithm.programmers.ìˆ«ìë¬¸ìì—´ê³¼ì˜ë‹¨ì–´;
 
 public class Solution {
     public static int solution(String s) {
         String[] nums = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         for(int i=0; i<nums.length; i++){
-            s = s.replace(nums[i], String.valueOf(i));//replaceAllÀº Á¤±ÔÈ­ÀÎµ¥ ÀÌÈÄ Â÷Â÷ÇØº¸ÀÚ ¤Ğ¤Ğ
+            s = s.replace(nums[i], String.valueOf(i));//replaceAllï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ ï¿½Ğ¤ï¿½
         }
         return Integer.parseInt(s);
     }
