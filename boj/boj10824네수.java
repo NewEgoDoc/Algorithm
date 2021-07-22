@@ -5,25 +5,15 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class boj11655ROT13 {
+public class boj10824네수 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        String input = br.readLine();
+        String[] input = br.readLine().split(" ");
         StringBuilder sb = new StringBuilder();
 
-        for(int i =0; i < input.length(); i++){
-            int num = input.charAt(i);
-
-            if(input.charAt(i) >= 'a' && input.charAt(i) <= 'z'){
-                sb.append('a');
-            } else if(input.charAt(i) >= 'A' && input.charAt(i) <= 'Z') {
-                sb.append('A');
-            } else {
-                sb.append(input.charAt(i));
-            }
-        }
+        sb.append(Long.parseLong(input[0]+input[1]) + Long.parseLong(input[2]+input[3]));
 
         bw.write(sb.toString());
 
