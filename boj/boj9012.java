@@ -3,7 +3,7 @@ package algorithm.boj;
 import java.io.*;
 import java.util.Stack;
 
-public class boj9012 {
+public class boj9012 {//괄호
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader((new InputStreamReader(System.in)));
         BufferedWriter wr = new BufferedWriter((new OutputStreamWriter(System.out)));

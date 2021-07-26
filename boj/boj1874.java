@@ -3,7 +3,7 @@ package algorithm.boj;
 import java.io.*;
 import java.util.*;
 
-public class boj1874 {
+public class boj1874 {//스택수열
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader((new InputStreamReader(System.in)));
         BufferedWriter wr = new BufferedWriter((new OutputStreamWriter(System.out)));

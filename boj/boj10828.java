@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Stack;
 
-public class boj10828 {
+public class boj10828 {//스택
 	public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//���� Scanner���� ������ ���� ������ �ݵ�� �˾Ƴ���
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));//==

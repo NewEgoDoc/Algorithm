@@ -2,7 +2,7 @@ package algorithm.boj;
 
 import java.io.*;
 
-public class boj9093 {
+public class boj9093 {//단어뒤집기
 
     public static void main(String[] args) throws IOException {
 
