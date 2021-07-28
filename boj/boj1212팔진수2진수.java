@@ -4,40 +4,37 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Stack;
 
 public class boj1212팔진수2진수 {
     public static void main(String[] args) throws Exception {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-
+        String[] binaryOf = {"000","001","010","011","100","101","110","111"};
         String input = br.readLine();
 
-        Stack<Integer> stack = new Stack<>();
-
-        for(int i = input.length()-1; i >= 0; i--){
+        for(int i = 0; i < input.length(); i++){
             int num = input.charAt(i) -'0';
-            int count = 3;
-            while(count >0){
-                stack.push(num%2);
-                num /= 2;
-                count--;
-            }
+            if(i == 0){
+                if(num == 1){
+                    sb.append("1");
+                } else if(num == 2){
+                    sb.append("10");
+                } else if(num == 3){
+                    sb.append("11");
+                } else {
+                    sb.append(binaryOf[num]);
+                }
+            } else sb.append(binaryOf[num]);
         }
 
-        while(!stack.isEmpty()){
-            if(sb.toString().length() == 0 && stack.peek() == 0){
-                stack.pop();
-            }
-            sb.append(stack.pop());
-        }
-
-        bw.write(sb.toString());
+        if(sb.toString().equals("000")) bw.write("0");
+        else bw.write(sb.toString());
 
         bw.flush();
         bw.close();
         br.close();
-
     }
+
+    //String a1 = Integer.toBinaryString(temp);
 }
