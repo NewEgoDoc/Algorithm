@@ -1,29 +1,30 @@
-package algorithm.programmers.키패드누르기;
+package Algorithm.kakao;
 
-public class Solution2 {
+public class Lv1키패드누르기 {
     public static String solution(int[] numbers, String hand) {
         StringBuilder sb = new StringBuilder();
         int left = 10;
         int right = 12;
         for(int i=0; i < numbers.length; i++){
-            if(numbers[i] == 0) {
+            if(numbers[i] == 0) {//0일 경우는 11로 두고
                 numbers[i] = 11;
             }
-            if(numbers[i]%3 == 0) {
+
+            if(numbers[i]%3 == 0) {//3 6 9 일 경우
                 sb.append("R");
                 right = numbers[i];
-            } else if(numbers[i]%3 == 1) {
+            } else if(numbers[i]%3 == 1) {// 1 4 7 일 경우
                 sb.append("L");
                 left = numbers[i];
-            } else if(numbers[i]%3 == 2) {
+            } else if(numbers[i]%3 == 2) {//2 5 8 0 일 경우
                 int standard1;
                 if(numbers[i] > left) standard1 = numbers[i] - left;
                 else standard1 = left - numbers[i];
-                
+
                 int standard2;
-                if(numbers[i] > right) standard2 = numbers[i] - right; 
+                if(numbers[i] > right) standard2 = numbers[i] - right;
                 else standard2 = right - numbers[i];
-                
+
                 int distance1 = (standard1/3) + (standard1%3);
                 int distance2 = (standard2/3) + (standard2%3);
                 if(distance1 < distance2) {
@@ -45,10 +46,10 @@ public class Solution2 {
         }
         return sb.toString();
     }
-    
+
     public static void main(String[] args) {
-    	int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-    	String hand = "right";
-    	System.out.println(solution(numbers, hand));
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        String hand = "right";
+        System.out.println(solution(numbers, hand));
     }
 }
