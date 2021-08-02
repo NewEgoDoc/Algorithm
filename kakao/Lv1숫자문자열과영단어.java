@@ -1,4 +1,4 @@
-package Algorithm.kakao;
+package algorithm.kakao;
 
 public class Lv1숫자문자열과영단어 {
     public static int solution(String s) {
