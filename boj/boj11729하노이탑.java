@@ -21,7 +21,6 @@ public class boj11729하노이탑 {
 
         int n = Integer.parseInt(br.readLine());
 
-
         StringBuilder sb = new StringBuilder();
         sb.append((int)(Math.pow(2, n) - 1)).append('\n');
         hanoi(n,1,2,3,sb);
