@@ -1,10 +1,6 @@
 package algorithm.kakao.Lv2;
 
-import algorithm.kakao.Lv1실패율;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Lv2파일명정렬 {
     /*
@@ -29,40 +25,57 @@ public class Lv2파일명정렬 {
     */
 
     public static String[] solution(String[] files) {
-        List<String> file = new ArrayList<String>();
+        String[] file = new String[files.length];
 
         for(int i = 0; i < files.length; i++){
-            file.add(files[i]);
+            file[i] = files[i];
         }
-        Comparator<String> com = new Comparator<String>() {
+
+        Arrays.sort(file, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
 
-                String x = o1;
-                String y = o2;
-/*
-                if(o1 > o2){
-                    return -1;
-                } else if(o1 < o2){
-                    return 1;
-                } else {
-                    if(o1 > o2){
-                        return 1;
-                    } else if(o1 < o2){
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                }
+                String head1 = o1.split("[0-9]")[0].toLowerCase();
+                String head2 = o2.split("[0-9]")[0].toLowerCase();
 
-*/
-            return 0;
+                int standard = head1.compareTo(head2);
+
+                if(standard == 0){
+                    int numLastIndex1 = 0;
+                    int numLastIndex2 = 0;
+                    for(int i = head1.length(); i < o1.length(); i++){
+                        if(o1.charAt(i) < '0' || o1.charAt(i) > '9'){
+                            numLastIndex1 = i;
+                            break;
+                        }
+                    }
+                    for(int i = head2.length(); i < o2.length(); i++){
+                        if(o2.charAt(i) < '0' || o2.charAt(i) > '9'){
+                            numLastIndex2 = i;
+                            break;
+                        }
+                    }
+
+                    int number1 = Integer.parseInt(o1.substring(head1.length(),numLastIndex1));
+                    int number2 = Integer.parseInt(o2.substring(head2.length(),numLastIndex2));
+
+
+                    return number1 - number2;
+
+                } else {
+                    return standard;
+                }
             }
-        };
-        return files;
+        });
+
+        return file;
     }
     public static void main(String[] args){
         String[] files ={"img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"};
-        System.out.println(solution(files));
+        String[] answer = (solution(files));
+
+        for(int i =0; i< answer.length; i++){
+            System.out.println(answer[i]);
+        }
     }
 }
