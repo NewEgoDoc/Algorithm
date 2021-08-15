@@ -25,6 +25,39 @@ public class Lv2파일명정렬 {
     */
 
     public static String[] solution(String[] files) {
+        String[] answer = {};
+// 조건에 따른 정렬을 하기 위해 Comparator 구현
+// compare 리턴값이 양수면 두 객체의 자리를 바꿔줌
+        Arrays.sort(files, new Comparator<String>(){
+            @Override
+            public int compare(String o1, String o2) {
+// 숫자 앞부분을 잘라서 head 생성
+                String head1 = o1.split("[0-9]")[0];
+                String head2 = o2.split("[0-9]")[0];
+// compareTo를 사용한 비교를 위해서는 모두 소문자로 변경 후 비교
+                int result = head1.toLowerCase().compareTo(head2.toLowerCase());
+                if (result == 0) { // 같은 문자일 경우 숫자로 비교
+                    result = convertNum(o1, head1) - convertNum(o2, head2);
+                }
+                return result;
+            }
+        });
+        return files;
+    }
+    public static int convertNum(String str, String head) {
+        str = str.substring(head.length()); // head 길이만큼 잘라서 숫자부터 시작하게 만들어줌
+        String result = "";
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c) && result.length() < 5) // 숫자인지 그리고 result 길이가 5가 안 넘는지 확인
+                result += c;
+            else
+                break;
+        }
+        return Integer.valueOf(result);
+    }
+
+
+    /*public static String[] solution(String[] files) {
         String[] file = new String[files.length];
 
         for(int i = 0; i < files.length; i++){
@@ -49,6 +82,9 @@ public class Lv2파일명정렬 {
                             break;
                         }
                     }
+
+                    int number1 = Integer.parseInt(o1.substring(head1.length(),numLastIndex1-1));
+
                     for(int i = head2.length(); i < o2.length(); i++){
                         if(o2.charAt(i) < '0' || o2.charAt(i) > '9'){
                             numLastIndex2 = i;
@@ -56,9 +92,7 @@ public class Lv2파일명정렬 {
                         }
                     }
 
-                    int number1 = Integer.parseInt(o1.substring(head1.length(),numLastIndex1));
                     int number2 = Integer.parseInt(o2.substring(head2.length(),numLastIndex2));
-
 
                     return number1 - number2;
 
@@ -69,9 +103,9 @@ public class Lv2파일명정렬 {
         });
 
         return file;
-    }
+    }*/
     public static void main(String[] args){
-        String[] files ={"img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"};
+        String[] files ={"A-10 Thunderbolt II", "B-50 Superfortress", "F-5 Freedom Fighter", "F-14 Tomcat"};
         String[] answer = (solution(files));
 
         for(int i =0; i< answer.length; i++){
