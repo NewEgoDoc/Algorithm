@@ -4,18 +4,63 @@ public class Lv2프렌즈4블록 {
     public static int solution(int m, int n, String[] board) {
         int answer = 0;
 
+        char[][] map = new char[board.length][board[0].length()];
+        boolean[][] check = new boolean[board.length][board[0].length()];
         for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
+            for(int j = 0; j < n; j++) {
+                map[i][j] = board[i].charAt(j);
+            }
+        }
+        boolean go = true;
+        while(go){
+            go = false;
+        /*같은 블럭 체크*/
+        for(int i = 0; i < m-1; i++){
+            for(int j = 0; j < n-1; j++){
+
+                if(map[i][j] == ' '){
+                    continue;
+                }
+
+                if(map[i][j] == map[i+1][j] &&
+                        map[i][j] == map[i][j+1] &&
+                        map[i][j] == map[i+1][j+1]){
+                    check[i][j] = true;
+                    check[i+1][j] = true;
+                    check[i][j+1] = true;
+                    check[i+1][j+1] = true;
+                    go = true;
+                }
+            }
+        }
+
+        /*개수세고*/
+        for(int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if(check[i][j]){
+                    answer++;
+                    if(i-1 >= 0){
+                        map[i][j] = map[i-1][j];
+                        map[i-1][j] = ' ';
+                    }
+                    check[i][j] = false;
+                }
+            }
+        }
+        /*블럭을 떨어뜨리자
+        for(int j = n ;j >= 0; j--){
+            for(int i = 0; i < m; i++){
 
             }
+        }*/
         }
 
         return answer;
     }
     public static void main(String[] args){
-        int m = 4;
-        int n = 5;
-        String[] board = {"CCBDE", "AAADE", "AAABF", "CCBBF"};
+        int m = 5;
+        int n = 6;
+        String[] board = {"AAAAAA", "BBAATB", "BBAATB", "JJJTAA", "JJJTAA"};
         System.out.println(solution(m,n,board));
         /*
         m	n	board	answer
