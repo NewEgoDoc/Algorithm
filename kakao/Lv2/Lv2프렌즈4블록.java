@@ -14,45 +14,40 @@ public class Lv2프렌즈4블록 {
         boolean go = true;
         while(go){
             go = false;
-        /*같은 블럭 체크*/
-        for(int i = 0; i < m-1; i++){
-            for(int j = 0; j < n-1; j++){
+            /*같은 블럭 체크*/
+            for(int i = 0; i < m-1; i++){
+                for(int j = 0; j < n-1; j++){
 
-                if(map[i][j] == ' '){
-                    continue;
-                }
-
-                if(map[i][j] == map[i+1][j] &&
-                        map[i][j] == map[i][j+1] &&
-                        map[i][j] == map[i+1][j+1]){
-                    check[i][j] = true;
-                    check[i+1][j] = true;
-                    check[i][j+1] = true;
-                    check[i+1][j+1] = true;
-                    go = true;
-                }
-            }
-        }
-
-        /*개수세고*/
-        for(int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if(check[i][j]){
-                    answer++;
-                    if(i-1 >= 0){
-                        map[i][j] = map[i-1][j];
-                        map[i-1][j] = ' ';
+                    if(map[i][j] == ' '){
+                        continue;
                     }
-                    check[i][j] = false;
+
+                    if(map[i][j] == map[i+1][j] &&
+                            map[i][j] == map[i][j+1] &&
+                            map[i][j] == map[i+1][j+1]){
+                        check[i][j] = true;
+                        check[i+1][j] = true;
+                        check[i][j+1] = true;
+                        check[i+1][j+1] = true;
+                        go = true;
+                    }
                 }
             }
-        }
-        /*블럭을 떨어뜨리자
-        for(int j = n ;j >= 0; j--){
-            for(int i = 0; i < m; i++){
 
+            /*개수세고*/
+            for(int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if(check[i][j]){
+                        answer++;
+                        for(int k = i; k >0; k--){
+                            map[k][j] = map[k-1][j];
+                        }
+                        map[0][j] = ' ';
+
+                        check[i][j] = false;
+                    }
+                }
             }
-        }*/
         }
 
         return answer;
