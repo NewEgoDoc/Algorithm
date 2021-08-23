@@ -5,18 +5,19 @@ public class Lv2문자열압축 {
         int answer = s.length();
 
         for(int i = 1; i <=s.length()/2; i++){
-            int pos = 0;
+            int now = 0;
             int len = s.length();
 
-            for(;pos+i <=s.length();){
-                String unit = s.substring(pos,pos+i);
-                pos += i;
+
+            while(now+i <=s.length()){
+                String sub = s.substring(now,now+i);
+                now += i;
 
                 int cnt = 0;
-                for(;pos+i <=s.length();){
-                    if(unit.equals(s.substring(pos,pos+i))){
+                while(now+i <=s.length()){
+                    if(sub.equals(s.substring(now,now+i))){
                         ++cnt;
-                        pos += i;
+                        now += i;
                     } else {
                         break;
                     }
