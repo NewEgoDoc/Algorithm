@@ -1,25 +1,17 @@
 package algorithm.boj.BFS;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.*;
+import java.util.*;
 
 public class boj16928뱀과사다리게임 {
-    static boolean visited[] = new boolean[101];
-    static int count[] = new int[101];
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
 
         int[] miro = new int[101];
-        /*for(int i = 0 ; i <= 100; i++){
-            miro[i] = i;
-        }*/
-
+        boolean[] visited = new boolean[101];
+        int[] count = new int[101];
         String[] num = br.readLine().split(" ");
         int N = Integer.parseInt(num[0]);
         int M = Integer.parseInt(num[1]);
@@ -32,7 +24,7 @@ public class boj16928뱀과사다리게임 {
             miro[index] = go;
         }
 
-        bfs(miro);
+        bfs(miro,visited,count,sb);
 
         bw.write(sb.toString());
         bw.flush();
@@ -40,34 +32,32 @@ public class boj16928뱀과사다리게임 {
         br.close();
     }
 
-    static void bfs(int[] miro) {
-        Queue<Integer> pq = new LinkedList<Integer>();
-        pq.offer(1);
+    static void bfs(int[] miro,boolean[] visited,int[] count,StringBuilder sb) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.offer(1);
         count[1] = 0;
         visited[1] = true;
 
-        while(!pq.isEmpty()) {
-            int cur = pq.poll();
-            if(cur == 100) {
-                System.out.println(count[cur]);
+        while(!queue.isEmpty()) {
+            int now = queue.poll();
+            if(now == 100) {
+                sb.append(count[now]);
                 return;
             }
 
             for(int i = 1; i < 7; i++) {
-                int x = cur + i;
+                int x = now + i;
                 if(100 < x) continue;
                 if(visited[x]) continue;
                 visited[x] = true;
 
-                if(miro[x] != 0) { // 사다리 또는 뱀의 위치일때
-                    if(!visited[miro[x]]) {
-                        pq.offer(miro[x]);
-                        visited[miro[x]] = true;
-                        count[miro[x]] = count[cur] + 1;
-                    }
-                }else { //아무것도 아닐때
-                    pq.offer(x);
-                    count[x] = count[cur] + 1;
+                if(miro[x] == 0) {
+                    queue.offer(x);
+                    count[x] = count[now] + 1;
+                }else if(!visited[miro[x]]) {
+                    queue.offer(miro[x]);
+                    visited[miro[x]] = true;
+                    count[miro[x]] = count[now] + 1;
                 }
             }
         }
