@@ -91,7 +91,7 @@ public class Lv2순위검색 {
                 }
             }
 
-            index = start;
+            index = start;//이분탐색으로 이후 탐색 인덱스 지정
 /*
             for(int j = 0; j < conditions.length; j++){
                 for(int k = 0; k < 5; k++){
@@ -109,7 +109,7 @@ public class Lv2순위검색 {
                     continue;
                 }
 
-                for(int k = 0; k < infoTable.length; k++){
+                for(int k = index; k < infoTable.length; k++){//아까 찾은 index 적용
                             System.out.println(infoTable[k][j] +" "+ conditions[j]);
                     if(satisfied[k]){
                         if(j  <= 3){
@@ -123,7 +123,7 @@ public class Lv2순위검색 {
             }
 
             int num = 0;
-            for(int j = index; j < satisfied.length; j++){
+            for(int j = index; j < satisfied.length; j++){//아까 찾은 index 적용
                 if(satisfied[j]) num++;
             }
 
