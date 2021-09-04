@@ -2,55 +2,44 @@ package algorithm.kakao.Lv3;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Lv3추석트래픽 {
     public static int solution(String[] lines){
         int answer = 0;
-        String[] starts = new String[lines.length];
-        String[] ends = new String[lines.length];
 
+        int[] cnt = new int[lines.length];
+        double complete;
 
-        int i = 0;
-        for(String line: lines){
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(int i = 0; i<lines.length;i++){
+            lines[i] = lines[i].substring(11).replace(":","").replace("s","");
 
-            StringBuilder sb = new StringBuilder();
-            String[] info = line.split(" ");
+            int sec = Integer.parseInt(lines[i].substring(0,2))*3600 +
+                    Integer.parseInt(lines[i].substring(2,4))*60+
+                    Integer.parseInt(lines[i].substring(4,6));
 
-            String date = info[0];
-            String time = info[1];
-
-            sb.append(date);
-            sb.append(" ");
-            sb.append(time);
-
-
-            Date endDate = null;
-            try {endDate = sdf1.parse(sb.toString());} catch (Exception e) {}
-
-
-            String[] interval = info[2].split("(s|\\.)");
-            int term = Integer.parseInt(interval[0])*1000;
-
-            if(interval.length > 1){
-                if(interval[1].length() == 3){
-                    term += Integer.parseInt(interval[1]);
-                } else if(interval[1].length() == 2){
-                    term += Integer.parseInt(interval[1])*10;
-                } else {
-                    term += Integer.parseInt(interval[1])*100;
-                }
-            }
-
-            starts[i] = sdf2.format(new Date(endDate.getTime() - term + 1));
-            System.out.println(starts[i]);
-            ends[i] = sdf2.format(new Date(endDate.getTime()));
-            System.out.println(ends[i]);
-            i++;
-            System.out.println();
+            lines[i] = ""+ sec + lines[i].substring(6);
         }
 
+        for(int i = 0; i< lines.length;i++){
+            String[] split = lines[i].split("\\s");
+            complete = Double.parseDouble(split[0]);
+
+            double area = complete+1;
+
+            for(int j = i;j< lines.length;j++){
+                split = lines[j].split("\\s");
+
+                double start = Double.parseDouble(split[0]) - Double.parseDouble(split[1]) + 0.001;
+                if(start < area){
+                    cnt[i]++;
+                }
+            }
+        }
+        for(int i = 0; i< cnt.length;i++){
+            if(answer < cnt[i]) answer = cnt[i];
+        }
         return answer;
     }
 
