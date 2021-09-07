@@ -1,57 +1,60 @@
 package algorithm.kakao.Lv3;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Lv3불량사용자 {
-    static Set<Set<String>> set;
+    static private Set<Set<String>> result;
 
     public static int solution(String[] user_id, String[] banned_id) {
-        int answer = 0;
-        set = new HashSet<>();
-        boolean[] visited = new boolean[user_id.length];
-        recurr(set,visited,user_id,banned_id.length,user_id.length,banned_id.length,0);
-
-        System.out.println();
-        for(Set<String> a : set){
-            System.out.println(a);
-
-        }
-
-
-
-//-------------------------------------------------------------------------
-
-        return answer;
+        result = new HashSet<>();
+        dfs(user_id, banned_id, new LinkedHashSet<>());
+        return result.size();
     }
 
-    public static void recurr(Set<Set<String>> set,boolean[] visited,String[] user_id,int targetCount,int n, int r, int start){
-        if(r == 0){
-            Set<String> sSet = new HashSet<>();
-            for(int i = 0; i < n;i++){
-                if(visited[i]) sSet.add(user_id[i]);
+    private static void dfs(String[] user_id, String[] banned_id, Set<String> set) {
+        if (set.size() == banned_id.length) {
+            if (isBannedUsers(set, banned_id)) {
+                result.add(new HashSet<>(set));
             }
 
-            if(sSet.size() == targetCount) {
-                //System.out.println(sSet);
-                //set.add(sSet);
+            return;
+        }
 
-                for(String str: sSet){
+        for (String userId : user_id) {
+            if (!set.contains(userId)) {
+                set.add(userId);
+                dfs(user_id, banned_id, set);
+                set.remove(userId);
+            }
+        }
+    }
 
-                }
+    private static boolean isBannedUsers(Set<String> set, String[] banned_id) {
+        int i = 0;
 
+        for (String user : set) {
+            if (!isSameString(user, banned_id[i++])) {
+                return false;
             }
         }
 
-        for(int i = start; i < n; i++){
-            visited[i] = true;
-            recurr(set,visited,user_id,targetCount,n,r-1,i+1);
-            visited[i] = false;
+        return true;
+    }
+
+    private static boolean isSameString(String a, String b) {
+        if (a.length() != b.length()) {
+            return false;
         }
 
+        for (int i = 0; i < a.length(); i++) {
+            if (b.charAt(i) == '*') continue;
+
+            if (a.charAt(i) != b.charAt(i)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args){
