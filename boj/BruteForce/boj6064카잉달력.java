@@ -1,58 +1,34 @@
 package algorithm.boj.BruteForce;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class boj6064카잉달력 {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
 
-        int testCate = Integer.parseInt(br.readLine());
+        for (int tc = 1; tc <= T; tc++) {
+            int M = sc.nextInt(), N = sc.nextInt(), x = sc.nextInt(), y = sc.nextInt();
 
-        for (int i = 0; i < testCate; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int m = Integer.parseInt(st.nextToken());
-            int n = Integer.parseInt(st.nextToken());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-
-            int count = x % (m + 1);
-            int tempY = x;
-
-            for (int j = 0; j < n; j++) {
-                int ty = tempY % n == 0 ? n : tempY % n;
-                if (ty == y) {
+            int lcm = M * N / gcd(M, N);
+            int n = 0;
+            int ans = -1;
+            while (n * M < lcm) {
+                if ((n * M + x - y) % N == 0) {
+                    ans = n * M + x;
                     break;
                 }
-
-                tempY = ty + m;
-                count += m;
+                n++;
             }
 
-            if (count > lcm(m, n)) {
-                bw.write(-1 + "\n");
-            } else {
-                bw.write(count + "\n");
-            }
+            System.out.println(ans);
         }
-        bw.flush();
-        bw.close();
-        br.close();
     }
 
-    /* 최소 공배수 */
-    static int lcm(int x, int y) {
-        return x * y / gcd(x, y);
-    }
-
-    /* 최대 공약수*/
-    static int gcd(int x, int y) {
-        while (y != 0) {
-            int r = x % y;
-            x = y;
-            y = r;
-        }
-        return x;
+    static int gcd(int n1, int n2) {
+        if (n2 == 0)
+            return n1;
+        return gcd(n2, n1 % n2);
     }
 }
