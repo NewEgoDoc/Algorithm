@@ -29,7 +29,7 @@ public class boj14501퇴사 {
         }
 
         int totalDay = 0;
-        combination(1);
+        recur(1);
 
         sb.append(max);
         bw.write(sb.toString());
@@ -38,7 +38,7 @@ public class boj14501퇴사 {
         br.close();
     }
 
-    private static void combination(int index) {
+    private static void recur(int index) {
         if(index > n+1){
             return;//값없이 리턴!
         }
@@ -49,7 +49,7 @@ public class boj14501퇴사 {
 
         for (int i = index; i <= n; i++) {
             visited[i] = true;
-            combination(i+days[i]);
+            recur(i+days[i]);
             visited[i] = false;
         }
     }
