@@ -21,21 +21,26 @@ public class boj13913숨바꼭질4 {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
 
-        if(K == N) sb.append(0);
-        else {sb.append(bfs() - 1 + "\n");}
-
-        Stack<Integer> stack = new Stack<>();
-        stack.push(K);
-        int index = K;
-
-        while (index != N) {
-            stack.push(previous[index]);
-            index = previous[index];
+        if(K == N) {
+            sb.append(0 + "\n");
+            sb.append(K);
         }
+        else {
+            sb.append(bfs() - 1 + "\n");
 
-        // 최종 출력
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop() + " ");
+            Stack<Integer> stack = new Stack<>();
+            stack.push(K);
+            int index = K;
+
+            while (index != N) {
+                stack.push(previous[index]);
+                index = previous[index];
+            }
+
+            // 최종 출력
+            while (!stack.isEmpty()) {
+                sb.append(stack.pop() + " ");
+            }
         }
 
         bw.write(sb.toString());
@@ -60,7 +65,7 @@ public class boj13913숨바꼭질4 {
 
                 if(next >= 0 && next < 100001){
                     if(visit[next] == 0){
-                        queue.offer(next);
+                        queue.add(next);
                         visit[next] = visit[X] + 1;
                         previous[next] = X;
                     }
