@@ -7,44 +7,35 @@ import java.util.Arrays;
 
 public class DevMatching로또의최고순위와최저순위 {
     public int[] solution(int[] lottos, int[] win_nums) {
-        int[] answer = {0, 0};
-        int zeroCnt = 0;
 
-        Arrays.sort(lottos);
-        for(int i = 0; i < 6; i++) {
-            if(lottos[i] != 0) break;
-            zeroCnt++;
-        }
-
-        Arrays.sort(win_nums);
-        for(int j = 0; j < 6; j++) {
-            for(int k = zeroCnt; k < 6; k++) {
-                if(win_nums[j] != lottos[k])    continue;
-                answer[0]++;
-                answer[1]++;
+        int[] answer = {6,6};
+        int same = 0;
+        int numberofZero= 0;
+        for (int i = 0; i < lottos.length; i++) {
+            for (int j = 0; j < win_nums.length; j++) {
+                if(lottos[i] == win_nums[j]) {
+                    same++;
+                }
             }
         }
 
-        answer[0] += zeroCnt;
-
-        for(int i = 0; i < 2; i++) {
-            if(answer[i] == 6) answer[i] = 1;
-            else if(answer[i] == 5) answer[i] = 2;
-            else if(answer[i] == 4) answer[i] = 3;
-            else if(answer[i] == 3) answer[i] = 4;
-            else if(answer[i] == 2) answer[i] = 5;
-            else answer[i] = 6;
+        for (int i = 0; i < lottos.length; i++) {
+            if(lottos[i] == 0) numberofZero++;
         }
 
+        if(same+numberofZero > 1) {
+            answer[0] -= (same+numberofZero-1);
+        }
+
+        if(same > 1) {
+            answer[1] -= (same-1);
+        }
         return answer;
     }
-
     @Test
     public void test(){
-        /*
-[44, 1, 0, 0, 31, 25]	[31, 10, 45, 1, 6, 19]	[3, 5]
-[0, 0, 0, 0, 0, 0]	[38, 19, 20, 40, 15, 25]	[1, 6]
-[45, 4, 35, 20, 3, 9]	[20, 9, 3, 45, 4, 35]	[1, 1]*/
-        assertThat //solution({44, 1, 0, 0, 31, 25},{31, 10, 45, 1, 6, 19})
+         Assertions.assertArrayEquals(solution(new int[]{44, 1, 0, 0, 31, 25},new int[]{31,10,45,1,6,19}),new int[]{3,5});
+         Assertions.assertArrayEquals(solution(new int[]{0, 0, 0, 0, 0, 0},new int[]{38, 19, 20, 40, 15, 25}),new int[]{1,6});
+         Assertions.assertArrayEquals(solution(new int[]{45, 4, 35, 20, 3, 9},new int[]{20, 9, 3, 45, 4, 35}),new int[]{1,1});
     }
 }
