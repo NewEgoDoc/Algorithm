@@ -1,4 +1,4 @@
-package algorithm복습.programmers.Lv1;
+package algorithm.복습.programmers.Lv1;
 
 public class 로또의최고순위와최저순위 {
     public int[] solution(int[] lottos, int[] win_nums) {
